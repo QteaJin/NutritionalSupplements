@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <head>
+    	<meta charset="UTF-8">
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+        <title>Библиотека пищевых консервантов и добавок</title>
+        <style type="text/css">
+			body { padding-top: 70px; font-family: 'Rubik', sans-serif;}
+			@media screen and (max-width: 768px) { body { padding-top: 0px; }}
+ 			#main_pic_div{
+	 			width:100%;
+	 			background-image: url(images/background_img_main.jpg);
+	 			background-color: green;
+ 			}
+ 			#footer{
+ 				background-color: #007bfd;
+ 				margin-top: 10px;
+ 				padding-top: 10px;
+ 				text-align: center;
+ 				height: 50px;
+ 			}
+ 			#footer_text{
+ 				color:white;
+ 			}
+ 			.container{
+ 				margin-top: 10px;
+ 			}
+        </style>
+    </head>
+    <body>
+    	<div th:insert="~{header :: header}"></div>
+    	<div class="d-flex justify-content-center" id="main_pic_div" >
+    			<img alt="main picture" src="/images/main.jpg">
+    		</div>
+   <div class="container">
+    	<h2>Welcome</h2>
+        <p>База пищевых добавок создана для того, чтобы понимать какие вещества могут попасть в Ваш организм и какой вред 
+        ему причинить.</p>
+        <p>Воспользуйтесь поиском для получения информации о пищевых добавках. Вы так же можете ознакомиться со всем перечнем 
+        в разделе <a href="/library">библиотека</a>.</p>
+        <div sec:authorize="hasRole('USER')">Text visible to user.</div>
+        <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+        <div sec:authorize="isAuthenticated()">
+            Text visible only to authenticated users.
+        </div>
+        <div class="d-flex justify-content-center" >
+        <div class="input-group col-md-8">
+ 			 <input type="text" class="form-control" id="search" placeholder="Введите наименование пищевой добавки. Например: E233" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  			<div class="input-group-append">
+    		<button class="btn btn-outline-secondary" type="button">Поиск</button>
+		  </div>
+		</div>
+		
+		</div>
+		<div class="d-flex justify-content-center" >
+		<span>Всю необходимую информацию Вы можете получать благодаря нашему Боту в Telegram - <a href="https://telegram.me/Healthfoodbot">Библиотечный Бот<img alt="pic" src="/images/telega.jpg"></a></span>
+		</div>
+    </div>
+    <div th:insert="~{footer :: site_footer}"></div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
+    </body>
+</html>

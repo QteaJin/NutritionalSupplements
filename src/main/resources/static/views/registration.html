@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns = "http://www.w3.org/1999/xhtml" xmlns:th = "http://www.thymeleaf.org" 
+   xmlns:sec = "http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+span {
+font-size: 30px;
+}
+</style>
+</head>
+
+<body onload="checkCookieJSESSIONID();">
+<div class="container">
+<div class="row">
+<div class = "col-md-6 offset-md-3">
+<span>Registration form:</span>
+<form id="registration-form" class="was-validated">
+  <div class="form-group">
+    <label for="uname">Username:</label>
+    <input type="text" class="form-control" id="name" placeholder="Enter username" name="name" required>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="form-group">
+    <label for="uname">Email:</label>
+    <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" required>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+    <div class="form-group">
+    <label for="pwd">Password confirm:</label>
+    <input type="password" class="form-control" id="passwordConfirmation" placeholder="Enter password" name="passwordConfirmation" required>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+
+  <button class="btn btn-primary" onclick="sendUserRegistrationForm(event)">Submit</button>
+</form>
+</div>
+</div>
+</div>
+
+<a href="/perform_logout">Logout</a>
+<!-- Bootstrap 4 -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+<script type="text/javascript">
+function sendUserRegistrationForm(event){
+	event.preventDefault();
+	var userData = {};
+	userData.name = document.querySelector('[name="name"]').value;
+	userData.email = document.querySelector('[name="email"]').value;
+	userData.password = document.querySelector('[name="password"]').value;
+	userData.passwordConfirmation = document.querySelector('[name="passwordConfirmation"]').value;
+	console.log(userData);
+	console.log(JSON.stringify(userData));
+	
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            //var registrationMessage = JSON.parse(xhr.responseText);
+            console.log(xhr.responseText);
+            }
+    };
+
+    xhr.open("POST", "/register" , true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(userData));
+}
+
+function checkCookieJSESSIONID(){
+	var name = "JSESSIONID";
+	console.log(getCookie(name));
+	var allCookies = document.cookie;
+	console.log(allCookies);
+
+}
+function getCookie(cname) {
+	  var name = cname + "=";
+	  var decodedCookie = decodeURIComponent(document.cookie);
+	  var ca = decodedCookie.split(';');
+	  for(var i = 0; i <ca.length; i++) {
+	    var c = ca[i];
+	    while (c.charAt(0) == ' ') {
+	      c = c.substring(1);
+	    }
+	    if (c.indexOf(name) == 0) {
+	      return c.substring(name.length, c.length);
+	    }
+	  }
+	  return "";
+	}
+</script>
+</html>
