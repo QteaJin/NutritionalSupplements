@@ -14,6 +14,7 @@ public class RegistrationController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registrUser(@RequestBody UserBean bean) {
 		System.out.println(bean.getName());
+		System.out.println("register");
 		return "Ok";
 		
 	}
