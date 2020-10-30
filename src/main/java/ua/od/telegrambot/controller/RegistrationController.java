@@ -15,6 +15,7 @@ public class RegistrationController {
 	public String registrUser(@RequestBody UserBean bean) {
 		System.out.println(bean.getName());
 		//System.out.println("register");
+		//new changes test
 		return "Ok";
 		
 	}
